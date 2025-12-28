@@ -7,7 +7,7 @@ import generateTokenAndSetCookie from '../utils/generateToken.js';
 
 export const signup = async (req, res) => { 
     try {
-        const {fullName, username, password, confirmPassword, gender} = req.body; 
+        const {fullName, username, password, confirmPassword} = req.body; 
 
         if (password !== confirmPassword){
             return res.status(400).json({error: "Password do not match"});
@@ -33,7 +33,6 @@ export const signup = async (req, res) => {
             fullName: fullName,
             username: username, 
             password: hashedPassword, //save the hashed password to the database 
-            gender: gender, 
             profilePic: profilePic
         });
 
