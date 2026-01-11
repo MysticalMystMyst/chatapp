@@ -19,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
         if (authUser){
             //when logged in we want to take the user id
             //Replace in parenthesis with port instead if running locally
-            const socket = io('https://canchat-w1sj.onrender.com/', {
+            const socket = io('https://canchat-w1sj.onrender.com', {
                 query: {
                     userId: authUser._id, 
                 }
