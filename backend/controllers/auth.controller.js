@@ -69,7 +69,7 @@ export const login = async (req, res) => {
 
         //User does not exist 
         if (!user || !passwordCheck){ 
-            return res.status(201).json({error: "Invalid User or password"}); 
+            return res.status(400).json({error: "Invalid User or password"}); 
         }
 
         //ensures that user is logged in (cookie stays for 15 days) 
