@@ -1,5 +1,7 @@
 import Message from '../models/messageModel.js'; 
 import Conversation from '../models/conversationModel.js'; 
+import { getRecieverSocketId, io } from '../socket/socket.js';
+
 
 export const sendMsg = async (req, res) => {
     // console.log("Message sent to ", req.params.id); 
@@ -34,12 +36,15 @@ export const sendMsg = async (req, res) => {
             conversation.messages.push(newMessage._id);
         }
 
-
-        //socket io to make it run in real time 
-    
-
         //Runs parallel at the same time 
         await Promise.all([conversation.save(), newMessage.save()]);
+
+
+        //socket io to make it run in real time 
+        const recieverSocketId = getRecieverSocketId(recieverId); 
+        if (recieverSocketId) { 
+            io.to(recieverSocketId).emit("newMessage", newMessage) //send events to specific clients 
+        }
 
         res.status(201).json(newMessage); 
 

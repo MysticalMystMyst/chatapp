@@ -1,4 +1,5 @@
 import useConversation from '../../../zustand/useConversation';
+import { useAuthContext } from '../../context/AuthContext';
 import Messages from './Messages';
 import SendMsg from './SendMsg';
 
@@ -37,10 +38,11 @@ const MessageContainer = () => {
 }
 
 const NoChatSelected = () => {
+    const {authUser}= useAuthContext() 
     return (
         <div className = "flex items-center justify-center w-full h-full">
             <div className = "px-4 text-center sm:text-lg md:text-xl text-gray-200 font-bold flex flex-col items-center gap-2">
-                <p>Welcome Alex Li</p>
+                <p>Welcome {authUser.fullName}</p>
                 <p>Select a chat to start messaging</p>
                 <IoIosChatbubbles className = "text-3xl md:text-6x1 text-center"/>
 
