@@ -18,7 +18,8 @@ export const SocketContextProvider = ({ children }) => {
     useEffect(() => {
         if (authUser){
             //when logged in we want to take the user id
-            const socket = io('http://localhost:8080', {
+            //Replace in parenthesis with port instead if running locally
+            const socket = io('https://canchat-w1sj.onrender.com/', {
                 query: {
                     userId: authUser._id, 
                 }
